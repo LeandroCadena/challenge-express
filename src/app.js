@@ -40,17 +40,10 @@ var model = {
     },
     erase: function (name, value) {
         let deleted = [];
-        if (value.includes('/')) {
-            this.clients[name] = this.clients[name].filter(function (curr) {
-                if (curr.date !== value) return curr;
-                else deleted.push(curr);
-            })
-        } else {
-            this.clients[name] = this.clients[name].filter(function (curr) {
-                if (curr.status !== value) return curr;
-                else deleted.push(curr);
-            })
-        }
+        this.clients[name] = this.clients[name].filter(function (curr) {
+            if (curr.date !== value && curr.status !== value) return curr;
+            else deleted.push(curr);
+        });
         return deleted;
     },
     getAppointments: function (name, status) {
@@ -79,7 +72,6 @@ server.post('/api/Appointments', function (req, res) {
 })
 
 server.get('/api/Appointments/clients', function (req, res) {
-    console.log('saddsadasds')
     return res.send(model.getClients());
 })
 
