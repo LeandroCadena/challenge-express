@@ -84,7 +84,6 @@ server.get('/api/Appointments/:name', function (req, res) {
         if (option === 'attend' || option === 'expire' || option === 'cancel') {
             if (!searchClient(model.clients, name, date)) return res.status(400).send('the client does not have a appointment for that date')
             return res.status(200).send(model[option](name, date));
-
         } else {
             return res.status(400).send('the option must be attend, expire or cancel')
         }
